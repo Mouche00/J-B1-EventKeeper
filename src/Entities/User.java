@@ -1,6 +1,6 @@
-package Models;
+package Entities;
 
-public class User {
+abstract public class User {
 
     private int id;
     private String name;
@@ -26,6 +26,7 @@ public class User {
         this.name = name;
     }
 
+    @Override
     public String toString(){
         return "#" + this.id + ": "
                 + "Name: " + this.name;

@@ -1,63 +1,56 @@
+import Entities.Menu;
 import Services.EventService;
+import Services.ParticipantService;
 
 import java.util.Scanner;
 
 public class Main {
     public static int EXIT_OPTION = 0;
 
-    public static void menu() {
-        System.out.println("\nSelect an option:");
-        System.out.println("1 - Login as an Administrator"
-                + "\n2 - Login as a User"
-                + "\n0 - Exit");
-        System.out.print("> ");
-
-    }
-
-    public static void adminMenu() {
-        System.out.println("\nSelect an option:");
-        System.out.println(
-                "1 - Show All Events"
-                + "\n2 - Create Event"
-                + "\n3 - Update Event"
-                + "\n4 - Delete Event"
-                + "\n5 - Search Events (Date, Location, Type)"
-                + "\n9 - Logout"
-                + "\n0 - Exit");
-        System.out.print("> ");
-
-    }
-
     public static void main(String[] args) {
+
+        Menu menu = new Menu();
+        EventService eventService = new EventService();
+        ParticipantService participantService = new ParticipantService();
         Scanner scanner = new Scanner(System.in);
         int option = -1;
 
         do {
-            menu();
+            menu.mainMenu();
             option = scanner.nextInt();
 
             switch(option){
                 case 1:
-                    EventService eventService = new EventService();
                     do {
-                        adminMenu();
+                        menu.adminMenu();
                         option = scanner.nextInt();
 
                         switch(option){
                             case 1:
-                                eventService.list();
+                                eventService.listAll();
                                 break;
                             case 2:
                                 eventService.create();
                                 break;
                             case 3:
-                                eventService.edit();
+                                eventService.update();
+                                break;
+                            case 4:
+                                eventService.delete();
+                                break;
+                            case 5:
+                                eventService.search();
+                                break;
+                            case 6:
+                                participantService.create();
                                 break;
                             default:
                                 System.out.println("Invalid option!");
                                 break;
                         }
                     } while(option != EXIT_OPTION);
+                    break;
+                case 2:
                     break;
                 default:
                     System.out.println("Invalid option!");

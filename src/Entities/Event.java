@@ -1,4 +1,4 @@
-package Models;
+package Entities;
 
 import java.time.LocalDate;
 
@@ -18,7 +18,7 @@ public class Event {
         this.id = id;
     }
 
-    public String title(){
+    public String getTitle(){
         return this.title;
     }
 
@@ -60,7 +60,7 @@ public class Event {
 
     @Override
     public String toString(){
-        return "id: " + this.id
+        return "\n\tId: " + this.id
                 + "\n\tTitle: " + this.title
                 + "\n\tDate: " + this.date
                 + "\n\tLocation: " + this.location
