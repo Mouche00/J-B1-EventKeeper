@@ -28,7 +28,7 @@ abstract public class User {
 
     @Override
     public String toString(){
-        return "#" + this.id + ": "
-                + "Name: " + this.name;
+        return "\n\tId: " + this.id
+                + "\n\tName: " + this.name;
     }
 }
