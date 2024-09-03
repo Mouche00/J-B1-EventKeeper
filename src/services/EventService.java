@@ -1,7 +1,10 @@
-package Services;
+package services;
 
-import Entities.Event;
-import Entities.EventType;
+import models.Event;
+import utils.Parser;
+import utils.enums.EventType;
+import utils.Validator;
+import utils.enums.InputType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,25 +23,26 @@ public class EventService {
 
     public void create() {
 
-        System.out.print("\nEnter title: ");
-        String title = scanner.nextLine();
+        String title = Validator.validateInput(
+                "title",
+                InputType.STRING);
 
-        System.out.print("Enter date (yyyy-mm-dd): ");
-        String input = scanner.nextLine();
-        boolean isDate = Pattern.matches("^(\\d{4,5}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]))$", input);
-        LocalDate date = isDate ? LocalDate.parse(input) : LocalDate.now();
+        LocalDate date = Parser.parseDate(
+                Validator.validateInput(
+                        "date (YYYY-MM-DD)",
+                        InputType.DATE));
 
-        System.out.print("Enter location: ");
-        String location = scanner.nextLine();
-
-        System.out.println("Choose type:"
-                + "\n\t1 - Music"
-                + "\n\t2 - Art"
-                + "\n\t3 - Tech");
-        System.out.print("> ");
-        option = scanner.nextInt();
-
+        String location = Validator.validateInput(
+                "location",
+                InputType.STRING);
         do {
+            System.out.println("Choose type:"
+                    + "\n\t1 - Music"
+                    + "\n\t2 - Art"
+                    + "\n\t3 - Tech");
+            System.out.print("> ");
+            option = Validator.validateInteger(scanner.nextLine());
+
             switch (option) {
                 case 1:
                     type = EventType.MUSIC;
@@ -50,17 +54,12 @@ public class EventService {
                     type = EventType.TECH;
                     break;
                 default:
-                    System.out.println("\nInvalid option");
-                    System.out.print("> ");
+                    System.out.println("\nInvalid option!\n");
                     break;
             }
         }while(option < 1 || option > 3);
 
-        // Absorbs stray 'Enter' key press
-        scanner.nextLine();
-
-        int id = events.isEmpty() ? 0 : events.getLast().getId() + 1;
-        Event event = new Event(id, title, date, location, type);
+        Event event = new Event(title, date, location, type);
         events.add(event);
     }
 
@@ -105,7 +104,7 @@ public class EventService {
                 + "\n\t3 - Tech"
                 + "\n\t0 - Original Value");
         System.out.print("> ");
-        option = scanner.nextInt();
+        option = Validator.validateInteger(scanner.nextLine());
 
         do {
             switch (option) {
@@ -158,13 +157,14 @@ public class EventService {
 
         int pos = 0;
         for(Event event : events) {
-            System.out.println("\n\t#" + pos + ": "
+            System.out.println("\n#" + pos + ": "
                     + "\t" + event);
             pos++;
         }
     }
 
     public void listAll() {
+        System.out.println("Event list:");
         this.list(events);
     }
 

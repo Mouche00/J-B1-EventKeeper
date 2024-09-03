@@ -1,14 +1,10 @@
-package Services;
+package services;
 
-import Entities.Event;
-import Entities.EventType;
-import Entities.Participant;
+import models.Participant;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class ParticipantService {
 
@@ -66,7 +62,7 @@ public class ParticipantService {
 
         int pos = 0;
         for(Participant participant : participants) {
-            System.out.println("\n\t#" + pos + ": "
+            System.out.println("\n#" + pos + ": "
                     + "\t" + participant);
             pos++;
         }

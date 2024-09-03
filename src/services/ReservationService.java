@@ -1,8 +1,8 @@
-package Services;
+package services;
 
-import Entities.Event;
-import Entities.Participant;
-import Entities.Reservation;
+import models.Event;
+import models.Participant;
+import models.Reservation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ public class ReservationService {
     List<Reservation> filteredReservations = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
-    public String getCurrentParticipantName() {
-        return currentReservation.getParticipant().getName();
+    public Participant getCurrentParticipant() {
+        return currentReservation.getParticipant();
     }
 
     public void setCurrentParticipant(Participant participant) {

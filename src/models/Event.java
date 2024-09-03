@@ -1,4 +1,6 @@
-package Entities;
+package models;
+
+import utils.enums.EventType;
 
 import java.time.LocalDate;
 
@@ -9,6 +11,8 @@ public class Event {
     private LocalDate date;
     private String location;
     private EventType type;
+
+    private static int counter = 0;
 
     public int getId(){
         return this.id;
@@ -50,8 +54,8 @@ public class Event {
         this.type = type;
     }
 
-    public Event(int id, String title, LocalDate date, String location, EventType type){
-        this.id = id;
+    public Event(String title, LocalDate date, String location, EventType type){
+        this.id = counter++;
         this.title = title;
         this.date = date;
         this.location = location;

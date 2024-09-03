@@ -1,4 +1,4 @@
-package Entities;
+package models;
 
 abstract public class User {
 
