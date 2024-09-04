@@ -1,4 +1,4 @@
-package utils.menus;
+package uis.menus;
 
 import services.EventService;
 import services.ParticipantService;

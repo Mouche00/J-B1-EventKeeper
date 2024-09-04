@@ -1,10 +1,7 @@
-import utils.menus.MainMenu;
-import utils.menus.Menu;
+import uis.menus.MainMenu;
 import services.EventService;
 import services.ParticipantService;
 import services.ReservationService;
-
-import java.util.Scanner;
 
 public class Main {
     public static int EXIT_OPTION = 0;

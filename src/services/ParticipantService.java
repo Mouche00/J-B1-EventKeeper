@@ -1,6 +1,8 @@
 package services;
 
+import dtos.ParticipantDTO;
 import models.Participant;
+import utils.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,66 +14,44 @@ public class ParticipantService {
     Scanner scanner = new Scanner(System.in);
     int option;
 
-    public void create() {
+    public void create(ParticipantDTO participantDTO) {
 
-        System.out.print("\nEnter name: ");
-        String name = scanner.nextLine();
-
-        int id = participants.isEmpty() ? 0 : participants.getLast().getId() + 1;
-        Participant participant = new Participant(id, name);
+        Participant participant = new Participant(participantDTO.getName());
         participants.add(participant);
     }
 
-    public Participant get(){
-        do {
-            System.out.println("Select a participant");
-            this.list();
-            System.out.print("> ");
-            option = scanner.nextInt();
+    public Participant get(int index){
 
-            if(option < 0 || option > participants.size() - 1) {
-                System.out.println("\nInvalid option!");
-            }
-        } while(option < 0 || option > participants.size() - 1);
-
-        // Absorbs stray 'Enter' key press
-        scanner.nextLine();
-
-        return participants.get(option);
+        return participants.get(index);
     }
 
-    public void update() {
-        this.isEmpty();
+    public void update(int index, ParticipantDTO participantDTO) {
 
-        Participant participant = this.get();
+        Participant participant = this.get(index);
 
-        System.out.print("Enter name: ");
-        String input = scanner.nextLine();
-        participant.setName(input.isEmpty() ? participant.getName() : input);
+        if(participantDTO.getName() != null) {
+            participant.setName(participantDTO.getName());
+        }
     }
 
-    public void delete() {
-        this.isEmpty();
+    public void delete(int index) {
 
-        Participant participant = this.get();
+        Participant participant = this.get(index);
         participants.remove(participant);
     }
 
     public void list() {
-        this.isEmpty();
+        Validator.listIsEmpty(participants);
+
+        System.out.println("\n####");
+        System.out.println("######## Participnts List: ");
+        System.out.println("####");
 
         int pos = 0;
         for(Participant participant : participants) {
             System.out.println("\n#" + pos + ": "
                     + "\t" + participant);
             pos++;
-        }
-    }
-
-    public void isEmpty() {
-        if(participants.isEmpty()){
-            System.out.println("\nNo participants available!");
-            return;
         }
     }
 

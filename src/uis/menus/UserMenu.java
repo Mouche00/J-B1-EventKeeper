@@ -1,4 +1,4 @@
-package utils.menus;
+package uis.menus;
 
 import services.EventService;
 import services.ParticipantService;
@@ -14,9 +14,9 @@ public class UserMenu extends Menu {
     @Override
     public int prompt() {
         String name = reservationService.getCurrentParticipant().getName();
-        System.out.println("##############################################################################");
+        System.out.println("\n##############################################################################");
         System.out.println("####                                                                      ####");
-        System.out.println("####                        Welcome " + name + "                          ####");
+        System.out.println("####                 --  Welcome Back " + name + "  --                   ####");
         System.out.println("####                                                                      ####");
         System.out.println("##############################################################################");
         System.out.println("\nSelect an option:"
@@ -34,13 +34,13 @@ public class UserMenu extends Menu {
     public void choice(int option) {
         switch (option) {
             case 1:
-                eventService.listAll();
+                if(!Validator.listIsEmpty(eventService.getEvents())) eventService.listAll();
                 break;
             case 2:
-                eventService.search();
+//                eventService.search();
                 break;
             case 3:
-                reservationService.create(eventService.get());
+//                reservationService.create(eventService.get());
                 break;
             case 4:
                 reservationService.delete();

@@ -2,8 +2,10 @@ package models;
 
 abstract public class User {
 
-    private int id;
-    private String name;
+    protected int id;
+    protected String name;
+
+    private static int counter = 0;
 
     public int getId(){
         return this.id;
@@ -21,8 +23,8 @@ abstract public class User {
         this.name = name;
     }
 
-    public User(int id, String name) {
-        this.id = id;
+    public User(String name) {
+        this.id = counter++;
         this.name = name;
     }
 
